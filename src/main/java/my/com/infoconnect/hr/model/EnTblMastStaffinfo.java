@@ -47,6 +47,11 @@ public class EnTblMastStaffinfo implements Serializable {
     @Column(name = "ApprovalID")
     private String approvalID;
 
+    public EnTblMastStaffinfo(String docufloID, String name) {
+        this.docufloID = docufloID;
+        this.name = name;
+    }
+
     public void setDocufloID(String docufloID) {
         this.docufloID = docufloID;
     }

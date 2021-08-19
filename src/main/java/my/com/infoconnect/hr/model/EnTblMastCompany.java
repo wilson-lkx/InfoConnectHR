@@ -16,6 +16,11 @@ public class EnTblMastCompany implements Serializable {
     @Column(name = "CompanyName")
     private String companyName;
 
+    public EnTblMastCompany(String companyID, String companyName) {
+        this.companyID = companyID;
+        this.companyName = companyName;
+    }
+
     public void setCompanyID(String companyID) {
         this.companyID = companyID;
     }
