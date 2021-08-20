@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>EDP Monitoring Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>InfoConnect Human Resource</title>
     <style>
 	* {
 		padding: 0;
@@ -25,7 +26,7 @@
 	}
 
 	label.logo {
-		color: white;
+		color: red;
 		font-size: 35px;
 		line-height: 80px;
 		padding: 0 100px;
@@ -113,6 +114,38 @@
 		}
 	}
 	</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        jQuery.fn.center = function () {
+            this.css("position","absolute");
+            this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) + $(window).scrollTop()) + "px");
+            this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+            return this;
+        }
+
+        jQuery.fn.addEffect = function () {
+            this.css("background-color","#0082e6");
+            this.css("border","#1px solid black");
+            this.css("cursor","pointer");
+            this.css("width","100%");
+            this.css("display","block");
+            return this;
+        }
+
+        $(document).ready(function() {
+            $("li").click(function() {
+                var id = $(this).find('a').attr('id');
+                if (id == 'report1') {
+                    $("#divButtons").show();
+                    $("#divButtons").center();
+                    $("#divButtons button").addEffect();
+                } else {
+                    $("#divButtons").hide();
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -124,13 +157,24 @@
         <label for="check" class="checkbtn"> <i class="fas fa-bars"></i> </label>
         <label class="logo">Infoconnect</label>
         <ul>
-            <li><a class="active" href="http://localhost:8099/portal/">Home</a></li>
-            <li><a href="/report">Leave Management Report</a></li>
-            <li><a href="#">E-Claim Report</a></li>
+            <li><a id="home" class="active" href="http://localhost:8099/portal/">Home</a></li>
+            <li><a id="report1">Leave Management Report</a></li>
+            <li><a id="report2">E-Claim Report</a></li>
         </ul>
     </nav>
 </header>
-<main> </main>
+<main>
+    <div id="divButtons" class="btn-group" style="display: none; ">
+        <button class="btn" onclick="location.href='../report';"><i class="fa fa-table"></i> <br> Data Table</button>
+        <br>
+        <br>
+        <button class="btn"><i class="fa fa-bar-chart"></i> <br> Statistics Bar Chart</button>
+        <br>
+        <br>
+        <button class="btn"><i class="fa fa-pie-chart"></i> <br> Statistics Pie Chart</button>
+    </div>
+
+</main>
 <footer> </footer>
 </body>
 

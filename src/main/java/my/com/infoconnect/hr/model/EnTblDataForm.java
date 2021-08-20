@@ -4,73 +4,58 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Embeddable
+@Entity
 @Table(name = "EN_TBL_DATA_FORM")
 public class EnTblDataForm implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Basic
+    @Id
     @Column(name = "WorkflowID")
     private String workflowID;
 
-    @Basic
     @Column(name = "FormID")
     private String formID;
 
-    @Basic
     @Column(name = "StaffID")
     private String staffID;
 
-    @Basic
     @Column(name = "LeaveType")
     private String leaveType;
 
-    @Basic
     @Column(name = "IFEmergency")
     private String IFEmergency;
 
-    @Basic
     @Column(name = "DateFrom")
     private String dateFrom;
 
-    @Basic
     @Column(name = "DateFromStartSession")
     private String dateFromStartSession;
 
-    @Basic
     @Column(name = "DateTo")
     private String dateTo;
 
-    @Basic
     @Column(name = "DateToStartSession")
     private String dateToStartSession;
 
-    @Basic
     @Column(name = "Days")
     private String days;
 
-    @Basic
     @Column(name = "Reason")
     private String reason;
 
-    @Basic
     @Column(name = "BackupPerson")
     private String backupPerson;
 
-    @Basic
     @Column(name = "ProjectManagerID")
     private String projectManagerID;
 
-    @Basic
     @Column(name = "ApproverID")
     private String approverID;
 
-    @Basic
     @Column(name = "FormStatus")
     private String formStatus;
 
-    @Basic
     @Column(name = "CreatedDate")
     private Date createdDate;
 
