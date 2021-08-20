@@ -22,7 +22,7 @@ public class EnTblDataFormDaoImpl implements EnTblDataFormDao {
         String statement = "SELECT WorkflowID, FormID, StaffID, LeaveType, IFEmergency, DateFrom, DateFromStartSession, " +
                 "DateTo, DateToStartSession, Days, Reason, BackupPerson, ProjectManagerID, ApproverID, FormStatus, CreatedDate";
         List<EnTblDataForm> enTblDataForms = new ArrayList<>();
-        List<Object[]>  list = em.createNativeQuery("SELECT * FROM EN_TBL_DATA_FORM").getResultList();
+        List<Object[]>  list = em.createNativeQuery(statement).getResultList();
         for (Object[] object : list) {
             EnTblDataForm enTblDataForm = new EnTblDataForm();
             enTblDataForm.setWorkflowID((String)object[0]);
