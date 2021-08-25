@@ -14,22 +14,23 @@
 			var companyId = $(this).val();
 			$.ajax({
 				type: 'GET',
-				url: '${pageContext.request.contextPath}/report/department?companyID=' + companyId,
+				url: '${pageContext.request.contextPath}/report/lms/department?companyID=' + companyId,
 				success: function(result) {
 					var result = JSON.parse(result);
 					var s = '<option value="" select="selected">All</option>';
 					for(var i = 0; i < result.length; i++) {
-						s += '<option value="' + result[i].deptID + '">' + result[i].deptName + '</option>';
+						s += '<option value="' + result[i].ID + '">' + result[i].deptID + '</option>';
 					}
 					$('#department').html(s);
 				}
 			});
 		});
 		$('#department').change(function() {
+		    var companyId = $('#company').val()
 			var departmentId = $(this).val();
 			$.ajax({
 				type: 'GET',
-				url: '${pageContext.request.contextPath}/report/staff?deptID=' + departmentId,
+				url: '${pageContext.request.contextPath}/report/lms/staff?companyID=' + companyId + '&deptID=' + departmentId,
 				success: function(result) {
 					var result = JSON.parse(result);
 					var s = '<option value="" select="selected">All</option>';
@@ -37,6 +38,11 @@
 						s += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
 					}
 					$('#staff').html(s);
+                    if(departmentId == "") {
+                        document.getElementById("staff").disabled=true;
+                    } else {
+                        document.getElementById("staff").disabled=false;
+                    }
 				}
 			});
 		});
@@ -64,7 +70,7 @@
 			};
 			$.ajax({
 				type: "POST",
-				url: "${pageContext.request.contextPath}/report/search",
+				url: "${pageContext.request.contextPath}/report/lms/search",
 				data: formData,
 				success: function(result) {
 					var data = JSON.parse(result);
@@ -286,6 +292,8 @@
 	</style>
 </head>
 
+<!-- https://stackoverflow.com/questions/51659414/populate-dropdown-list-with-current-day-month-and-year -->
+
 <body>
 	<!-- https://www.youtube.com/watch?v=J6jrLZ3Ah5g -->
 	<h1 align="center">Leave Management Report</h1>
@@ -315,6 +323,7 @@
 					<select id="mode" name="mode">
 						<option value="1" select="selected">Daily</option>
 						<option value="2">Monthly</option>
+						<option value="3">Yearly</option>
 					</select>
 				</div>
 				<div id="dailyDiv" style="margin-left: 33%; display: block;">
@@ -340,8 +349,6 @@
 				<div id="yearlyDiv" style="margin-left: 33%; padding:0px; display: none;">
 					<label for="year" class="label">Year:</label>
 					<select id="year" name="year">
-						<option value="2019">2019</option>
-						<option value="2020">2020</option>
 						<option value="2021">2021</option>
 						<option value="2022">2022</option>
 					</select>

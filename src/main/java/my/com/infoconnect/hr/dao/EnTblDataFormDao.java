@@ -1,9 +1,6 @@
 package my.com.infoconnect.hr.dao;
 
-import my.com.infoconnect.hr.model.EnTblDataForm;
+import java.io.Serializable;
 
-import java.util.List;
-
-public interface EnTblDataFormDao {
-    List<EnTblDataForm> findEnTblDataForms();
+public interface EnTblDataFormDao<T extends Serializable> extends AbstractHibernateDao<T> {
 }

@@ -3,21 +3,16 @@ package my.com.infoconnect.hr.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Embeddable
+@Entity
 @Table(name = "EN_TBL_MAST_LEAVETYPE")
 public class EnTblMastLeavetype implements Serializable {
-    public EnTblMastLeavetype(String leaveTypeID, String leaveTypeDesc) {
-        this.leaveTypeID = leaveTypeID;
-        this.leaveTypeDesc = leaveTypeDesc;
-    }
 
     private static final long serialVersionUID = 1L;
 
-    @Basic
+    @Id
     @Column(name = "LeaveTypeID")
     private String leaveTypeID;
 
-    @Basic
     @Column(name = "LeaveTypeDesc")
     private String leaveTypeDesc;
 

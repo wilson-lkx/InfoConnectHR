@@ -1,0 +1,203 @@
+#tblReport {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#tblReport td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#tblReport tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+#tblReport tr:hover {
+	background-color: #ddd;
+}
+
+#tblReport th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #2B8BD8;
+	color: white;
+}
+
+#company {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#company.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#company option {
+	background: #ffffff;
+}
+
+#department {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#department.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#department option {
+	background: #ffffff;
+}
+
+#staff {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#staff.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#staff option {
+	background: #ffffff;
+}
+
+#mode {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#mode.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#mode option {
+	background: #ffffff;
+}
+
+#dailyDate {
+	padding: 1px 4px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#dailyDate.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#dailyDate option {
+	background: #ffffff;
+}
+
+#month {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#month.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#month option {
+	background: #ffffff;
+}
+
+#year {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#year.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#year option {
+	background: #ffffff;
+}
+
+#leaveType {
+	padding: 2px 6px;
+	font-family: "Roboto", sans-serif;
+	cursor: pointer;
+	color: #D35400;
+	background-color: #FCF3CF;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+}
+
+#leaveType.focus,
+#select:hover {
+	outline: none;
+	border: 1px solid #bbbbbb;
+}
+
+#leaveType option {
+	background: #ffffff;
+}
+
+#search {
+	margin-top: -1%;
+	width: 10em;
+	height: 2em;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	font-weight: bold;
+	color: #A93226;
+}
+
+.label {
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: Black;
+	font-size: 15px;
+}

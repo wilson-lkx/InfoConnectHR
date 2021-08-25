@@ -16,11 +16,6 @@ public class EnTblMastDepartment implements Serializable {
     @Column(name = "DeptName")
     private String deptName;
 
-    public EnTblMastDepartment(String deptID, String deptName) {
-        this.deptID = deptID;
-        this.deptName = deptName;
-    }
-
     public void setDeptID(String deptID) {
         this.deptID = deptID;
     }

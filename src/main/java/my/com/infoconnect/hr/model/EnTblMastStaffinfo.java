@@ -26,8 +26,8 @@ public class EnTblMastStaffinfo implements Serializable {
     @Column(name = "DeptID")
     private String deptID;
 
-    @Column(name = "CompanyName")
-    private String companyName;
+    @Column(name = "CompanyID")
+    private String companyID;
 
     @Column(name = "Email", nullable = false)
     private String email;
@@ -46,11 +46,6 @@ public class EnTblMastStaffinfo implements Serializable {
 
     @Column(name = "ApprovalID")
     private String approvalID;
-
-    public EnTblMastStaffinfo(String docufloID, String name) {
-        this.docufloID = docufloID;
-        this.name = name;
-    }
 
     public void setDocufloID(String docufloID) {
         this.docufloID = docufloID;
@@ -92,12 +87,12 @@ public class EnTblMastStaffinfo implements Serializable {
         return deptID;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setCompanyID(String companyID) {
+        this.companyID = companyID;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public String getCompanyID() {
+        return companyID;
     }
 
     public void setEmail(String email) {
@@ -156,7 +151,7 @@ public class EnTblMastStaffinfo implements Serializable {
                 "designation=" + designation + '\'' +
                 "gender=" + gender + '\'' +
                 "deptID=" + deptID + '\'' +
-                "companyName=" + companyName + '\'' +
+                "companyName=" + companyID + '\'' +
                 "email=" + email + '\'' +
                 "dateJoined=" + dateJoined + '\'' +
                 "activeStatus=" + activeStatus + '\'' +

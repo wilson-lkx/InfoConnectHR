@@ -1,0 +1,57 @@
+CompanyID	CompanyName
+C001	InfoConnect
+C002	Docuflo (MSC)
+C003	Bpi Technologies
+C004	FirstBase
+
+CompanyID	CompanyName
+C001	InfoConnect SDN. BHD.
+C002	Docuflo(MSC) SDN. BHD.
+C003	Bpi Technologies SDN. BHD.
+C004	FirstBase
+
+DeptID	DeptName
+D001	BPI
+D002	Development
+D003	Enterprise Consulting
+D004	Finance
+D005	Government Sales
+D006	Human Resource
+D007	Implementation and Support
+D008	Management Information System
+D009	Project Management Office
+D010	Service and Delivery
+D020	CEO Office
+D021	Marketing
+
+USE IFC_HQ_DB;
+CREATE TABLE [dbo].[EN_TBL_MAST_COMPANY_DEPT] (
+    ID int IDENTITY(1,1) NOT NULL,
+    CompanyID nvarchar(10) NOT NULL,
+    DeptID nvarchar(10) NOT NULL,
+	CONSTRAINT [PK_EN_TBL_MAST_COMPANY_DEPT] PRIMARY KEY CLUSTERED 
+(
+    [Id] ASC
+));
+
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C001', 'D002');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C001', 'D004');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C001', 'D006');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C001', 'D009');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C001', 'D020');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C002', 'D001');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C002', 'D002');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C003', 'D002');
+INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C004', 'D002');
+
+- created table EN_TBL_MAST_COMPANY_DEPT
+- rename column name in EN_TBL_MAST_STAFFINFO from CompanyName to CompanyID
+- update companyName to comnpanyID
+  UPDATE EN_TBL_MAST_STAFFINFO SET CompanyID = 'C001' WHERE CompanyID = 'InfoConnect' OR CompanyID = 'Infoconnect' OR CompanyID = 'Infoconnect Sdn Bhd';
+  UPDATE EN_TBL_MAST_STAFFINFO SET CompanyID = 'C002' WHERE CompanyID = 'Docuflo (MSC)' OR CompanyID = 'Docuflo (msc)';
+  UPDATE EN_TBL_MAST_STAFFINFO SET CompanyID = 'C003' WHERE CompanyID = 'Bpi Technologies';
+- update data type for column companyID
+  USE IFC_HQ_DB
+  GO
+  Alter table EN_TBL_MAST_STAFFINFO Alter Column CompanyID nvarchar(10)
+  GO
