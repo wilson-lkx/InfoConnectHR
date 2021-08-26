@@ -46,6 +46,7 @@ INSERT INTO EN_TBL_MAST_COMPANY_DEPT(CompanyID, DeptID) VALUES ('C004', 'D002');
 
 - created table EN_TBL_MAST_COMPANY_DEPT
 - rename column name in EN_TBL_MAST_STAFFINFO from CompanyName to CompanyID
+  EXEC sp_rename 'Sales.SalesTerritory.TerritoryID', 'TerrID', 'COLUMN';
 - update companyName to comnpanyID
   UPDATE EN_TBL_MAST_STAFFINFO SET CompanyID = 'C001' WHERE CompanyID = 'InfoConnect' OR CompanyID = 'Infoconnect' OR CompanyID = 'Infoconnect Sdn Bhd';
   UPDATE EN_TBL_MAST_STAFFINFO SET CompanyID = 'C002' WHERE CompanyID = 'Docuflo (MSC)' OR CompanyID = 'Docuflo (msc)';

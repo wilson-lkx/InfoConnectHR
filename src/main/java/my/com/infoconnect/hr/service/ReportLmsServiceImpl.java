@@ -52,4 +52,9 @@ public class ReportLmsServiceImpl implements ReportLmsService {
     public List<EnTblMastStaffinfo> findEnTblMastStaffinfo(String companyID, String deptID) {
         return enTblMastStaffinfoDao.findEnTblMastStaffinfo(companyID, deptID);
     }
+
+    @Override
+    public EnTblMastStaffinfo findEnTblMastStaffinfo(String id) {
+        return enTblMastStaffinfoDao.findOne(EnTblMastStaffinfo_.DOCUFLO_ID, id);
+    }
 }

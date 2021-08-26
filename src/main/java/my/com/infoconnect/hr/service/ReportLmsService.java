@@ -15,4 +15,6 @@ public interface ReportLmsService {
     List<EnTblMastCompanyDept> findEnTblMastDepartment(String companyId);
 
     List<EnTblMastStaffinfo> findEnTblMastStaffinfo(String companyID, String deptID);
+
+    EnTblMastStaffinfo findEnTblMastStaffinfo(String id);
 }

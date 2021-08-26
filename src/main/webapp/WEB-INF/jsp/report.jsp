@@ -9,7 +9,56 @@
 	<title>Leave Management Report</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
+
+	function getCurrentDate(now) {
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+           day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        return today;
+	}
+
+	function getCurrentMonth(now) {
+        var month = now.getMonth();
+        var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var s = '';
+        for (var i = 0; i < 12; i++) {
+            s += '<option value="' + i + '"';
+            if (i == month) {
+               s += ' selected';
+            }
+            s += '>';
+            s += months[i];
+            s += '</option>';
+        }
+        return s;
+	}
+
+	function getCurrentYear(now) {
+        var year = now.getFullYear();
+        var startingYear = 2021;
+        var count = 10;
+        var s = '';
+        for (var i = startingYear; i < (startingYear + count); i++) {
+            s += '<option value="' + i + '"';
+            if (i == year) {
+               s += ' selected';
+            }
+            s += '>' + i + '</option>';
+        }
+        return s;
+	}
+
 	$(document).ready(function() {
+		var now = new Date();
+
+	    $('#datePicker').val(getCurrentDate(now));
+	    $('#monthPicker').html(getCurrentMonth(now));
+	    $('#yearPicker').html(getCurrentYear(now));
+
 		$('#company').change(function() {
 			var companyId = $(this).val();
 			$.ajax({
@@ -17,7 +66,7 @@
 				url: '${pageContext.request.contextPath}/report/lms/department?companyID=' + companyId,
 				success: function(result) {
 					var result = JSON.parse(result);
-					var s = '<option value="" select="selected">All</option>';
+					var s = '<option value="" selected>All</option>';
 					for(var i = 0; i < result.length; i++) {
 						s += '<option value="' + result[i].ID + '">' + result[i].deptID + '</option>';
 					}
@@ -33,7 +82,7 @@
 				url: '${pageContext.request.contextPath}/report/lms/staff?companyID=' + companyId + '&deptID=' + departmentId,
 				success: function(result) {
 					var result = JSON.parse(result);
-					var s = '<option value="" select="selected">All</option>';
+					var s = '<option value="" selected>All</option>';
 					for(var i = 0; i < result.length; i++) {
 						s += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
 					}
@@ -47,26 +96,31 @@
 			});
 		});
 		$('#mode').change(function() {
-			if($(this).val() == 2) { // 1=daily, 2=monthly
-				$("#dailyDiv").hide();
-				$("#monthlyDiv").show();
-				$("#yearlyDiv").show();
+			if($(this).val() == 1) { // 1=daily, 2=monthly, 3=yearly
+				$('#dailyDiv').show();
+				$('#monthlyDiv').hide();
+				$('#yearlyDiv').hide();
+			} else if ($(this).val() == 2){
+				$('#dailyDiv').hide();
+				$('#monthlyDiv').show();
+				$('#yearlyDiv').show();
 			} else {
-				$("#dailyDiv").show();
-				$("#monthlyDiv").hide();
-				$("#yearlyDiv").hide();
+				$('#dailyDiv').hide();
+				$('#monthlyDiv').hide();
+				$('#yearlyDiv').show();
 			}
 		});
-		$("#search_form").submit(function(event) {
+		$('#search_form').submit(function(event) {
 			event.preventDefault();
 			var formData = {
-				companyID: $("#company").val(),
-				deptID: $("#department").val(),
-				docufloID: $("#staff").val(),
-				dailyDate: $("#dailyDate").val(),
-				month: $("#month").val(),
-				year: $("#year").val(),
-				leaveTypeID: $("#leaveType").val(),
+				companyID: $('#company').val(),
+				deptID: $('#department').val(),
+				docufloID: $('#staff').val(),
+				mode: $('#mode').val();
+				date: $('#datePicker').val(),
+				month: $('#monthPicker').val(),
+				year: $('#yearPicker').val(),
+				leaveTypeID: $('#leaveType').val(),
 			};
 			$.ajax({
 				type: "POST",
@@ -193,7 +247,7 @@
 		background: #ffffff;
 	}
 
-	#dailyDate {
+	#datePicker {
 		padding: 1px 4px;
 		font-family: "Roboto", sans-serif;
 		cursor: pointer;
@@ -203,17 +257,17 @@
 		border-radius: 4px;
 	}
 
-	#dailyDate.focus,
+	#datePicker.focus,
 	#select:hover {
 		outline: none;
 		border: 1px solid #bbbbbb;
 	}
 
-	#dailyDate option {
+	#datePicker option {
 		background: #ffffff;
 	}
 
-	#month {
+	#monthPicker {
 		padding: 2px 6px;
 		font-family: "Roboto", sans-serif;
 		cursor: pointer;
@@ -223,17 +277,17 @@
 		border-radius: 4px;
 	}
 
-	#month.focus,
+	#monthPicker.focus,
 	#select:hover {
 		outline: none;
 		border: 1px solid #bbbbbb;
 	}
 
-	#month option {
+	#monthPicker option {
 		background: #ffffff;
 	}
 
-	#year {
+	#yearPicker {
 		padding: 2px 6px;
 		font-family: "Roboto", sans-serif;
 		cursor: pointer;
@@ -243,13 +297,13 @@
 		border-radius: 4px;
 	}
 
-	#year.focus,
+	#yearPicker.focus,
 	#select:hover {
 		outline: none;
 		border: 1px solid #bbbbbb;
 	}
 
-	#year option {
+	#yearPicker option {
 		background: #ffffff;
 	}
 
@@ -310,54 +364,43 @@
 				</div>
 				<div style="width: 33%; float: left;">
 					<label for="departments" class="label">Department:</label>
-					<select id="department" name="department"></select>
+					<select id="department" name="department">
+					    <option value="">All</option>
+					</select>
 				</div>
 				<div style="margin-left: 33%;">
 					<label for="staff" class="label">Staff:</label>
-					<select id="staff" name="staff"></select>
+					<select id="staff" name="staff">
+					    <option value="">All</option>
+					</select>
 				</div>
 			</div>
 			<div style="width:100%; padding: 4px 8px;">
 				<div style="width: 34%; float: left;">
 					<label for="mode" class="label">Mode:</label>
 					<select id="mode" name="mode">
-						<option value="1" select="selected">Daily</option>
+						<option value="1">Daily</option>
 						<option value="2">Monthly</option>
 						<option value="3">Yearly</option>
 					</select>
 				</div>
 				<div id="dailyDiv" style="margin-left: 33%; display: block;">
-					<label for="dailyDate" class="label">Daily Date:</label>
-					<input type="date" id="dailyDate" name="dailyDate"> </div>
+					<label for="datePicker" class="label">Date:</label>
+					<input type="date" id="datePicker" name="datePicker">
+				</div>
 				<div id="monthlyDiv" style="width: 33%; float: left; display: none;">
-					<label for="month" class="label">Month:</label>
-					<select id="month" name="month">
-						<option value="1">January</option>
-						<option value="2">February</option>
-						<option value="3">March</option>
-						<option value="4">April</option>
-						<option value="5">May</option>
-						<option value="6">Jun</option>
-						<option value="7">July</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
-						<option value="10">October</option>
-						<option value="11">November</option>
-						<option value="12">December</option>
-					</select>
+					<label for="monthPicker" class="label">Month:</label>
+					<select id="monthPicker" name="monthPicker"></select>
 				</div>
 				<div id="yearlyDiv" style="margin-left: 33%; padding:0px; display: none;">
-					<label for="year" class="label">Year:</label>
-					<select id="year" name="year">
-						<option value="2021">2021</option>
-						<option value="2022">2022</option>
-					</select>
+					<label for="yearPicker" class="label">Year:</label>
+					<select id="yearPicker" name="yearPicker"></select>
 				</div>
 			</div>
 			<div style="padding: 4px 8px;">
 				<label for="leaveTypes" class="label">Type of Leave:</label>
 				<select id="leaveType" name="leaveType">
-					<option value="" select="selected">All</option>
+					<option value="" selected>All</option>
 					<c:forEach items="${leaveTypes}" var="leaveType">
 						<option value="${leaveType.leaveTypeID}">${leaveType.leaveTypeDesc}</option>
 					</c:forEach>

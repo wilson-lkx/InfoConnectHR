@@ -47,6 +47,16 @@ public abstract class AbstractHibernateDaoImpl< T extends Serializable> {
         delete( entity );
     }
 
+    public T findOne( String field, String id ){
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);
+        Root<T> root = criteriaQuery.from(clazz);
+        criteriaQuery.select(root);
+        criteriaQuery.where(builder.equal(root.get(field), id));
+        TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
+        return query.getResultList().get(0);
+    }
+
     public List< T > findAll(String sort){
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);

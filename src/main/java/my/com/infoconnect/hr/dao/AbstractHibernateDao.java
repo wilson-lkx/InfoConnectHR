@@ -7,6 +7,8 @@ public interface AbstractHibernateDao<T extends Serializable> {
 
     T findOne(final long id);
 
+    T findOne(String field, String id);
+
     List<T> findAll();
 
     List<T> findAll(String sort);
