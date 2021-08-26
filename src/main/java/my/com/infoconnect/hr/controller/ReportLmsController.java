@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/report/lms")
@@ -48,12 +51,32 @@ public class ReportLmsController {
                                @RequestParam(value = "companyID", required = false) String companyID,
                                @RequestParam(value = "deptID", required = false) String deptID, //empty string is All
                                @RequestParam(value = "docufloID",required = false) String docufloID, //empty string is All
-                               @RequestParam(value = "dailyDate",required = false) String dailyDate,
+                               @RequestParam(value = "mode",required = false) String mode, //1=daily,2=monthly,3=yearly
+                               @RequestParam(value = "date",required = false) String date,
                                @RequestParam(value = "month",required = false) String month,
                                @RequestParam(value = "year",required = false) String year,
                                @RequestParam(value = "leaveTypeID", required = false) String leaveTypeID //empty string is All
     ) {
+        List<EnTblMastStaffinfo> enTblMastStaffinfos;
+        Map<String, List<EnTblDataForm>> enTblDataFormMap = new HashMap<>();
+
+
+        if (docufloID.isEmpty()) {
+            enTblMastStaffinfos = lmsReportService.findEnTblMastStaffinfo(companyID, deptID);
+        } else {
+            enTblMastStaffinfos = new ArrayList<>();
+            enTblMastStaffinfos.add(lmsReportService.findEnTblMastStaffinfo(docufloID));
+        }
+
+        for (EnTblMastStaffinfo enTblMastStaffinfo : enTblMastStaffinfos) {
+
+        }
+
+
         List<EnTblDataForm> enTblDataForms = lmsReportService.findEnTblDataForm();
+
+
+
         return gson.toJson(enTblDataForms);
     }
 }
