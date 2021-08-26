@@ -116,7 +116,7 @@
 				companyID: $('#company').val(),
 				deptID: $('#department').val(),
 				docufloID: $('#staff').val(),
-				mode: $('#mode').val();
+				mode: $('#mode').val(),
 				date: $('#datePicker').val(),
 				month: $('#monthPicker').val(),
 				year: $('#yearPicker').val(),
