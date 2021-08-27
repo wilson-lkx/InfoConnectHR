@@ -57,4 +57,14 @@ public class ReportLmsServiceImpl implements ReportLmsService {
     public EnTblMastStaffinfo findEnTblMastStaffinfo(String id) {
         return enTblMastStaffinfoDao.findOne(EnTblMastStaffinfo_.DOCUFLO_ID, id);
     }
+
+//    @Override
+//    public EnTblReportData findEnTblReportInfo(String staffId) {
+//        return enTblDataFormDao.findEnTblReportInfo(staffId);
+//    }
+
+    @Override
+    public List<EnTblReportData> findEnTblReportData(String staffId, String dateFrom, String dateTo, String leaveTypeId) {
+        return enTblDataFormDao.findEnTblReportData(staffId, dateFrom, dateTo, leaveTypeId);
+    }
 }

@@ -8,57 +8,53 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Leave Management Report</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
 	<script type="text/javascript">
-
 	function getCurrentDate(now) {
-        var month = (now.getMonth() + 1);
-        var day = now.getDate();
-        if (month < 10)
-            month = "0" + month;
-        if (day < 10)
-           day = "0" + day;
-        var today = now.getFullYear() + '-' + month + '-' + day;
-        return today;
+		var month = (now.getMonth() + 1);
+		var day = now.getDate();
+		if(month < 10) month = "0" + month;
+		if(day < 10) day = "0" + day;
+		var today = now.getFullYear() + '-' + month + '-' + day;
+		return today;
 	}
 
 	function getCurrentMonth(now) {
-        var month = now.getMonth();
-        var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
-        var s = '';
-        for (var i = 0; i < 12; i++) {
-            s += '<option value="' + i + '"';
-            if (i == month) {
-               s += ' selected';
-            }
-            s += '>';
-            s += months[i];
-            s += '</option>';
-        }
-        return s;
+		var month = now.getMonth();
+		var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+		var s = '';
+		for(var i = 0; i < 12; i++) {
+			s += '<option value="' + i + '"';
+			if(i == month) {
+				s += ' selected';
+			}
+			s += '>';
+			s += months[i];
+			s += '</option>';
+		}
+		return s;
 	}
 
 	function getCurrentYear(now) {
-        var year = now.getFullYear();
-        var startingYear = 2021;
-        var count = 10;
-        var s = '';
-        for (var i = startingYear; i < (startingYear + count); i++) {
-            s += '<option value="' + i + '"';
-            if (i == year) {
-               s += ' selected';
-            }
-            s += '>' + i + '</option>';
-        }
-        return s;
+		var year = now.getFullYear();
+		var startingYear = 2021;
+		var count = 10;
+		var s = '';
+		for(var i = startingYear; i < (startingYear + count); i++) {
+			s += '<option value="' + i + '"';
+			if(i == year) {
+				s += ' selected';
+			}
+			s += '>' + i + '</option>';
+		}
+		return s;
 	}
-
 	$(document).ready(function() {
 		var now = new Date();
-
-	    $('#datePicker').val(getCurrentDate(now));
-	    $('#monthPicker').html(getCurrentMonth(now));
-	    $('#yearPicker').html(getCurrentYear(now));
-
+		$('#datePicker').val(getCurrentDate(now));
+		$('#monthPicker').html(getCurrentMonth(now));
+		$('#yearPicker').html(getCurrentYear(now));
 		$('#company').change(function() {
 			var companyId = $(this).val();
 			$.ajax({
@@ -75,7 +71,7 @@
 			});
 		});
 		$('#department').change(function() {
-		    var companyId = $('#company').val()
+			var companyId = $('#company').val()
 			var departmentId = $(this).val();
 			$.ajax({
 				type: 'GET',
@@ -87,11 +83,11 @@
 						s += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
 					}
 					$('#staff').html(s);
-                    if(departmentId == "") {
-                        document.getElementById("staff").disabled=true;
-                    } else {
-                        document.getElementById("staff").disabled=false;
-                    }
+					if(departmentId == "") {
+						document.getElementById("staff").disabled = true;
+					} else {
+						document.getElementById("staff").disabled = false;
+					}
 				}
 			});
 		});
@@ -100,7 +96,7 @@
 				$('#dailyDiv').show();
 				$('#monthlyDiv').hide();
 				$('#yearlyDiv').hide();
-			} else if ($(this).val() == 2){
+			} else if($(this).val() == 2) {
 				$('#dailyDiv').hide();
 				$('#monthlyDiv').show();
 				$('#yearlyDiv').show();
@@ -111,8 +107,8 @@
 			}
 		});
 		$('#search_form').submit(function(event) {
-			event.preventDefault();
-			var formData = {
+	        event.preventDefault();
+            var formData = {
 				companyID: $('#company').val(),
 				deptID: $('#department').val(),
 				docufloID: $('#staff').val(),
@@ -122,20 +118,23 @@
 				year: $('#yearPicker').val(),
 				leaveTypeID: $('#leaveType').val(),
 			};
-			$.ajax({
-				type: "POST",
-				url: "${pageContext.request.contextPath}/report/lms/search",
-				data: formData,
-				success: function(result) {
-					var data = JSON.parse(result);
-					console.log(data.length);
-					var s = '<tr><th>Company</th><th>Department</th><th>Staff ID</th><th>Staff Name</th><th>Leave Type</th><th>IFEmergency</th><th>Date From</th><th>Date To</th><th>Leave Day</th></tr>';
-					for(var i = 0; i < data.length; i++) {
-						s += '<tr><td>' + data[i].company + '</td><td>' + data[i].department + '</td><td>' + data[i].staffId + '</td><td>' + data[i].staffName + '</td><td>' + data[i].leaveType + '</td><td>' + data[i].IFEmergency + '</td><td>' + data[i].dateFrom + '</td><td>' + data[i].dateTo + '</td><td>' + data[i].leaveDay + '</td></tr>';
-					}
-					$('#tblReport').html(s);
-				}
-			});
+	        $('#reportTable').DataTable({
+                ajax: {
+                    url: '${pageContext.request.contextPath}/report/lms/data',
+                    type: 'POST',
+                    data: formData,
+                    dataSrc: ''
+                },
+                columns: [
+				    {data: 'deptName'},
+					{data: 'name'},
+					{data: 'leaveType'},
+					{data: 'reason'},
+					{data: 'dateFrom'},
+					{data: 'dateTo'},
+					{data: 'days'}
+                ]
+            });
 		});
 	});
 	</script>
@@ -345,7 +344,6 @@
 	}
 	</style>
 </head>
-
 <!-- https://stackoverflow.com/questions/51659414/populate-dropdown-list-with-current-day-month-and-year -->
 
 <body>
@@ -365,13 +363,13 @@
 				<div style="width: 33%; float: left;">
 					<label for="departments" class="label">Department:</label>
 					<select id="department" name="department">
-					    <option value="">All</option>
+						<option value="">All</option>
 					</select>
 				</div>
 				<div style="margin-left: 33%;">
 					<label for="staff" class="label">Staff:</label>
 					<select id="staff" name="staff">
-					    <option value="">All</option>
+						<option value="">All</option>
 					</select>
 				</div>
 			</div>
@@ -386,8 +384,7 @@
 				</div>
 				<div id="dailyDiv" style="margin-left: 33%; display: block;">
 					<label for="datePicker" class="label">Date:</label>
-					<input type="date" id="datePicker" name="datePicker">
-				</div>
+					<input type="date" id="datePicker" name="datePicker"> </div>
 				<div id="monthlyDiv" style="width: 33%; float: left; display: none;">
 					<label for="monthPicker" class="label">Month:</label>
 					<select id="monthPicker" name="monthPicker"></select>
@@ -408,14 +405,27 @@
 			</div>
 			<input id="search" type="submit" value="Search" style="float:right;"> </form>
 	</div>
+	<br>
 	<div style="border: 1px solid black; padding: 15px; background-color: #F7CAC9;  margin-top: 20px;">
-		<!-- https://mdbootstrap.com/docs/b4/jquery/tables/pagination/ -->
-		<table id="tblReport">
-			<tr>
-				<td> No Records! </td>
-			</tr>
+		<div class='buttons'>
+			<button class="button btnPdf" onclick="myFunction()">Pdf</button>
+			<button class="button btnExcel" onclick="myFunction()">Excel</button>
+		</div>
+		<br>
+		<table id="reportTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th>Department</th>
+					<th>Staff</th>
+					<th>Leave Type</th>
+					<th>Reason</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Number of Days</th>
+				</tr>
+			</thead>
 		</table>
 	</div>
-	<br> </body>
+</body>
 
 </html>
