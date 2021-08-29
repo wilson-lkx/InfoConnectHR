@@ -6,6 +6,12 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 	<title>Leave Management Report</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
@@ -155,7 +161,7 @@
 	}
 
 	#tblReport tr:hover {
-		background-color: #ddd;
+		background-color: #BOAAAA;
 	}
 
 	#tblReport th {
@@ -166,255 +172,133 @@
 		color: white;
 	}
 
-	#company {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#company.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#company option {
-		background: #ffffff;
-	}
-
-	#department {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#department.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#department option {
-		background: #ffffff;
-	}
-
-	#staff {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#staff.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#staff option {
-		background: #ffffff;
-	}
-
-	#mode {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#mode.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#mode option {
-		background: #ffffff;
-	}
-
-	#datePicker {
-		padding: 1px 4px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#datePicker.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#datePicker option {
-		background: #ffffff;
-	}
-
-	#monthPicker {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#monthPicker.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#monthPicker option {
-		background: #ffffff;
-	}
-
-	#yearPicker {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#yearPicker.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#yearPicker option {
-		background: #ffffff;
-	}
-
-	#leaveType {
-		padding: 2px 6px;
-		font-family: "Roboto", sans-serif;
-		cursor: pointer;
-		color: #D35400;
-		background-color: #FCF3CF;
-		border: 1px solid #dddddd;
-		border-radius: 4px;
-	}
-
-	#leaveType.focus,
-	#select:hover {
-		outline: none;
-		border: 1px solid #bbbbbb;
-	}
-
-	#leaveType option {
-		background: #ffffff;
-	}
-
-	#search {
+#search {
 		margin-top: -1%;
 		width: 10em;
 		height: 2em;
 		font-family: Arial, Helvetica, sans-serif;
 		text-align: center;
 		font-weight: bold;
-		color: #A93226;
 	}
 
-	.label {
-		font-family: Arial, Helvetica, sans-serif;
-		font-weight: bold;
-		color: Black;
-		font-size: 15px;
-	}
+.container{
+
+}
+
+.row{
+height: 80px;
+}
+
+.col{
+
+}
+
+
+
 	</style>
 </head>
 <!-- https://stackoverflow.com/questions/51659414/populate-dropdown-list-with-current-day-month-and-year -->
 
-<body>
+<body style ="background-image: linear-gradient(white, grey);">
 	<!-- https://www.youtube.com/watch?v=J6jrLZ3Ah5g -->
 	<h1 align="center">Leave Management Report</h1>
-	<div style="border: 1px solid black; padding: 15px 15px 15px; background-color: #FA8072;">
+	<div class = "container-xl">
+	<div style="border: 2px solid black; padding: 15px 15px 15px; background-color: #EDEDED;">
 		<form id="search_form" name="search_form">
-			<div style="width:100%; padding: 4px 8px;">
-				<div style="width: 34%; float: left;">
-					<label for="companies" class="label">Company:</label>
-					<select id="company" name="company">
+        <div class ="row">
+
+			<div class ="col">
+
+					<label for="companies" class="fw-bold">Company:</label>
+					<select class="form-select form-select-sm" id="company" aria-label=".form-select-sm" name="company">
 						<c:forEach items="${companies}" var="company">
 							<option value="${company.companyID}">${company.companyName}</option>
 						</c:forEach>
 					</select>
+
 				</div>
-				<div style="width: 33%; float: left;">
-					<label for="departments" class="label">Department:</label>
-					<select id="department" name="department">
+
+                <div class ="col">
+
+					<label for="departments" class="fw-bold">Department:</label>
+					<select class="form-select form-select-sm" id="department" aria-label=".form-select-sm" name="department">
 						<option value="">All</option>
 					</select>
+
 				</div>
-				<div style="margin-left: 33%;">
-					<label for="staff" class="label">Staff:</label>
-					<select id="staff" name="staff">
+
+				<div class ="col">
+
+					<label for="staff" class="fw-bold">Staff:</label>
+					<select class="form-select form-select-sm" id="staff" aria-label=".form-select-sm" name="staff">
 						<option value="">All</option>
 					</select>
+
 				</div>
+
 			</div>
-			<div style="width:100%; padding: 4px 8px;">
-				<div style="width: 34%; float: left;">
-					<label for="mode" class="label">Mode:</label>
-					<select id="mode" name="mode">
+
+<div class ="row">
+
+
+			<div class ="col">
+
+					<label for="mode" class="fw-bold">Mode:</label>
+					<select class="form-select form-select-sm" id="mode" aria-label=".form-select-sm" name="mode">
 						<option value="1">Daily</option>
 						<option value="2">Monthly</option>
 						<option value="3">Yearly</option>
 					</select>
-				</div>
-				<div id="dailyDiv" style="margin-left: 33%; display: block;">
-					<label for="datePicker" class="label">Date:</label>
-					<input type="date" id="datePicker" name="datePicker"> </div>
-				<div id="monthlyDiv" style="width: 33%; float: left; display: none;">
-					<label for="monthPicker" class="label">Month:</label>
-					<select id="monthPicker" name="monthPicker"></select>
-				</div>
-				<div id="yearlyDiv" style="margin-left: 33%; padding:0px; display: none;">
-					<label for="yearPicker" class="label">Year:</label>
-					<select id="yearPicker" name="yearPicker"></select>
-				</div>
 			</div>
-			<div style="padding: 4px 8px;">
-				<label for="leaveTypes" class="label">Type of Leave:</label>
-				<select id="leaveType" name="leaveType">
+
+			<div class ="col">
+				<div id="dailyDiv" style="display: block;">
+					<label for="datePicker" class="fw-bold">Date:</label>
+					<input type="date" class="form-control form-control-sm" id="datePicker" name="datePicker">
+				</div>
+				<div id="monthlyDiv" style="display: none;">
+					<label for="monthPicker" class="fw-bold">Month:</label>
+					<select class="form-select form-select-sm" id="monthPicker" aria-label=".form-select-sm" name="monthPicker"></select>
+				</div>
+				</div>
+			<div class ="col">
+				<div id="yearlyDiv" style="display: none;">
+					<label for="yearPicker" class="fw-bold">Year:</label>
+					<select class="form-select form-select-sm" id="yearPicker" aria-label=".form-select-sm" name="yearPicker"></select>
+				</div>
+				</div>
+
+	</div>
+
+	<div class="row">
+	<div class="col-4">
+
+				<label for="leaveTypes" class="fw-bold">Type of Leave:</label>
+				<select class="form-select form-select-sm" id="leaveType" aria-label=".form-select-sm" name="leaveType">
 					<option value="" selected>All</option>
 					<c:forEach items="${leaveTypes}" var="leaveType">
 						<option value="${leaveType.leaveTypeID}">${leaveType.leaveTypeDesc}</option>
 					</c:forEach>
 				</select>
+
 			</div>
-			<input id="search" type="submit" value="Search" style="float:right;"> </form>
+			</div>
+			<input id="search" type="submit" class="btn btn-dark" value="Search" style="float:right;"> </form>
 	</div>
+	</div>
+
 	<br>
-	<div style="border: 1px solid black; padding: 15px; background-color: #F7CAC9;  margin-top: 20px;">
-		<div class='buttons'>
-			<button class="button btnPdf" onclick="myFunction()">Pdf</button>
-			<button class="button btnExcel" onclick="myFunction()">Excel</button>
+	<div class = "container-xl">
+	<div style="border: 2px solid black; padding: 15px; background-color: #EDEDED;  margin-top: 20px;">
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<button class="btn btn-dark me-md-2"  onclick="myFunction()">Pdf</button>
+			<button class="btn btn-dark"  onclick="myFunction()">Excel</button>
 		</div>
 		<br>
-		<table id="reportTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-			<thead>
-				<tr>
+		<div class="table-responsive-xxl">
+		<table id="reportTable" class="table table-striped table-hover table-bordered table align-middle" cellspacing="0" width="100%">
+			<thead class="table-dark table align-middle">
+				<tr class= "align-middle">
 					<th>Department</th>
 					<th>Staff</th>
 					<th>Leave Type</th>
@@ -425,6 +309,9 @@
 				</tr>
 			</thead>
 		</table>
+		</div>
+
+	</div>
 	</div>
 </body>
 
