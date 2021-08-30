@@ -90,6 +90,10 @@ public class EnTblDataFormDaoImpl extends AbstractHibernateDaoImpl<EnTblDataForm
                 (StringUtils.isEmpty(dateTo) ?
                         "data.dateFrom = '" + dateFrom + "'" :
                         "data.dateFrom >= '" + dateFrom + "' AND data.dateTo <= '" + dateTo + "'"
+                ) +
+                (!StringUtils.isEmpty(leaveTypeId) ?
+                        " AND data.leaveType = '" + leaveTypeId + "'" :
+                        ""
                 );
         String orderBy = " ORDER BY dept.deptName";
 
