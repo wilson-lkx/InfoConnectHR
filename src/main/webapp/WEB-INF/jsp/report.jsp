@@ -67,16 +67,17 @@
 	function getFileName() {
 	    var reportType;
 	    var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
-        var mode = Integer.parseInt($('#mode').val());
+        var mode = $('#mode').val();
+        var modeValue = Integer.parseInt(mode);
 
-	    if (mode == 1) {
+	    if (modeValue == 1) {
 	        reportType = 'Daily';
 	        date = $('#datePicker').val();
-	    } else if (mode == 2) {
+	    } else if (modeValue == 2) {
 	        reportType = 'Monthly';
 	        var monthPicker = $('#monthPicker').val();
 	        date = months[Integer.parseInt(monthPicker)] + ' ' + $('#yearPicker').val();
-	    } else if (mode == 3) {
+	    } else if (modeValue == 3) {
 	        reportType = 'Yearly';
 	        date = $('#yearPicker').val();
 	    }
