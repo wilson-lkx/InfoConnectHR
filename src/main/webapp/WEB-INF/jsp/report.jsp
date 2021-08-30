@@ -64,25 +64,27 @@
 		}
 		return s;
 	}
-	function getFileName(reportType) {
-	    var date = '';
+	function getFileName() {
+	    var reportType;
 	    var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var mode = Integer.parseInt($('#mode').val());
 
-	    if (reportType == 'Daily') {
+	    if (mode == 1) {
+	        reportType = 'Daily';
 	        date = $('#datePicker').val();
-	    } else if (reportType == 'Monthly') {
+	    } else if (mode == 2) {
+	        reportType = 'Monthly';
 	        var monthPicker = $('#monthPicker').val();
 	        date = months[Integer.parseInt(monthPicker)] + ' ' + $('#yearPicker').val();
-	    } else if (reportType == 'Yearly') {
-	         date = $('#yearPicker').val();
+	    } else if (mode == 3) {
+	        reportType = 'Yearly';
+	        date = $('#yearPicker').val();
 	    }
 	    return 'LMS_' + reportType + 'Report ' + date;
 	}
 
 	$(document).ready(function() {
 		var now = new Date();
-		var reportType = '';
-
 		$('#datePicker').val(getCurrentDate(now));
 		$('#monthPicker').html(getCurrentMonth(now));
 		$('#yearPicker').html(getCurrentYear(now));
@@ -127,23 +129,20 @@
 				$('#dailyDiv').show();
 				$('#monthlyDiv').hide();
 				$('#yearlyDiv').hide();
-				reportType += 'Daily';
 			} else if($(this).val() == 2) {
 				$('#dailyDiv').hide();
 				$('#monthlyDiv').show();
 				$('#yearlyDiv').show();
-				reportType += 'Monthly';
 			} else {
 				$('#dailyDiv').hide();
 				$('#monthlyDiv').hide();
 				$('#yearlyDiv').show();
-				reportType += 'Yearly';
 			}
 		});
 		$('#search_form').submit(function(event) {
 			event.preventDefault();
 			$('#tableDiv').show();
-			var fileName = getFileName(reportType);
+			var fileName = getFileName();
 			var formData = {
 				companyID: $('#company').val(),
 				deptID: $('#department').val(),
@@ -154,6 +153,7 @@
 				year: $('#yearPicker').val(),
 				leaveTypeID: $('#leaveType').val(),
 			};
+			// https://datatables.net/manual/tech-notes/3
 			$('#reportTable').DataTable({
 				ajax: {
 					url: '${pageContext.request.contextPath}/report/lms/data',
