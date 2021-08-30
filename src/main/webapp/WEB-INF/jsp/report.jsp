@@ -75,7 +75,7 @@
 	    } else if (mode == '2') {
 	        reportType = 'Monthly';
 	        var monthPicker = $('#monthPicker').val();
-	        date = months[Integer.parseInt(monthPicker)] + ' ' + $('#yearPicker').val();
+	        date = months[parseInt(monthPicker)] + ' ' + $('#yearPicker').val();
 	    } else if (mode == '3') {
 	        reportType = 'Yearly';
 	        date = $('#yearPicker').val();
