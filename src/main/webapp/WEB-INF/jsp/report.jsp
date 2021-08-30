@@ -79,6 +79,13 @@
 		}
 		return 'LMS_' + reportType + 'Report ' + date;
 	}
+
+	function destroyTableIfExist() {
+        if ( $.fn.dataTable.isDataTable('#reportTable') ) {
+          $('#reportTable').DataTable().destroy();
+        }
+	}
+
 	$(document).ready(function() {
 		var now = new Date();
 		$('#datePicker').val(getCurrentDate(now));
@@ -137,6 +144,7 @@
 		});
 		$('#search_form').submit(function(event) {
 			event.preventDefault();
+			destroyTableIfExist();
 			$('#tableDiv').show();
 			var fileName = getFileName();
 			var formData = {

@@ -89,7 +89,7 @@ public class EnTblDataFormDaoImpl extends AbstractHibernateDaoImpl<EnTblDataForm
         String where = " WHERE data.staffID = '" + staffId + "' AND " +
                 (StringUtils.isEmpty(dateTo) ?
                         "data.dateFrom = '" + dateFrom + "'" :
-                        "data.dateFrom >= '" + dateFrom + "' AND data.dateTo <= '" + dateTo + "'"
+                        "data.dateFrom >= '" + dateFrom + "' AND data.dateFrom <= '" + dateTo + "'"
                 ) +
                 (!StringUtils.isEmpty(leaveTypeId) ?
                         " AND data.leaveType = '" + leaveTypeId + "'" :
