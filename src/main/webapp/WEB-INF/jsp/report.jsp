@@ -142,6 +142,7 @@
 		});
 		$('#search_form').submit(function(event) {
 			event.preventDefault();
+			$('#tableDiv').show();
 			var fileName = getFileName(reportType);
 			var formData = {
 				companyID: $('#company').val(),
@@ -303,7 +304,7 @@
 	</div>
 	<br>
 	<div class="container-xl">
-		<div style="border: 2px solid black; padding: 15px; background-color: #EDEDED;  margin-top: 20px;">
+		<div id="tableDiv" style="border: 2px solid black; padding: 15px; background-color: #EDEDED;  margin-top: 20px; display: none;">
 			<div class="table-responsive-xxl">
 				<table id="reportTable" class="table table-striped table-hover table-bordered table align-middle" cellspacing="0" width="100%">
 					<thead class="table-dark table align-middle">
