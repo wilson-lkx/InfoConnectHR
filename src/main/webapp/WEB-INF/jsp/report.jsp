@@ -68,16 +68,15 @@
 	    var reportType;
 	    var months = ['January', 'February', 'March', 'April', 'May', 'Jun', 'July', 'August', 'September', 'October', 'November', 'December'];
         var mode = $('#mode').val();
-        var modeValue = Integer.parseInt(mode);
 
-	    if (modeValue == 1) {
+	    if (mode == '1') {
 	        reportType = 'Daily';
 	        date = $('#datePicker').val();
-	    } else if (modeValue == 2) {
+	    } else if (mode == '2') {
 	        reportType = 'Monthly';
 	        var monthPicker = $('#monthPicker').val();
 	        date = months[Integer.parseInt(monthPicker)] + ' ' + $('#yearPicker').val();
-	    } else if (modeValue == 3) {
+	    } else if (mode == '3') {
 	        reportType = 'Yearly';
 	        date = $('#yearPicker').val();
 	    }
