@@ -91,18 +91,58 @@
 		$('#datePicker').val(getCurrentDate(now));
 		$('#monthPicker').html(getCurrentMonth(now));
 		$('#yearPicker').html(getCurrentYear(now));
+
+		var companyId = $('#company').val();
+		var departmentId = $('#department').val();
+		$.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath}/report/lms/department?companyID=' + companyId,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var departmentHtml = '<option value="" selected>All</option>';
+				for(var i = 0; i < result.length; i++) {
+					departmentHtml += '<option value="' + result[i].ID + '">' + result[i].deptID + '</option>';
+				}
+				$('#department').html(departmentHtml);
+			}
+		});
+		$.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath}/report/lms/staff?companyID=' + companyId + '&deptID=' + departmentId,
+			success: function(result) {
+				var result = JSON.parse(result);
+				var staffHtml = '<option value="" selected>All</option>';
+				for(var i = 0; i < result.length; i++) {
+					staffHtml += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
+				}
+				$('#staff').html(staffHtml);
+			}
+		});
 		$('#company').change(function() {
 			var companyId = $(this).val();
+			var departmentId = $('#department').val();
 			$.ajax({
 				type: 'GET',
 				url: '${pageContext.request.contextPath}/report/lms/department?companyID=' + companyId,
 				success: function(result) {
 					var result = JSON.parse(result);
-					var s = '<option value="" selected>All</option>';
+					var departmentHtml = '<option value="" selected>All</option>';
 					for(var i = 0; i < result.length; i++) {
-						s += '<option value="' + result[i].ID + '">' + result[i].deptID + '</option>';
+						departmentHtml += '<option value="' + result[i].ID + '">' + result[i].deptID + '</option>';
 					}
-					$('#department').html(s);
+					$('#department').html(departmentHtml);
+				}
+			});
+			$.ajax({
+				type: 'GET',
+				url: '${pageContext.request.contextPath}/report/lms/staff?companyID=' + companyId + '&deptID=' + departmentId,
+				success: function(result) {
+					var result = JSON.parse(result);
+					var staffHtml = '<option value="" selected>All</option>';
+					for(var i = 0; i < result.length; i++) {
+						staffHtml += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
+					}
+					$('#staff').html(staffHtml);
 				}
 			});
 		});
@@ -114,16 +154,11 @@
 				url: '${pageContext.request.contextPath}/report/lms/staff?companyID=' + companyId + '&deptID=' + departmentId,
 				success: function(result) {
 					var result = JSON.parse(result);
-					var s = '<option value="" selected>All</option>';
+					var staffHtml = '<option value="" selected>All</option>';
 					for(var i = 0; i < result.length; i++) {
-						s += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
+						staffHtml += '<option value="' + result[i].docufloID + '">' + result[i].name + '</option>';
 					}
-					$('#staff').html(s);
-					if(departmentId == "") {
-						document.getElementById("staff").disabled = true;
-					} else {
-						document.getElementById("staff").disabled = false;
-					}
+					$('#staff').html(staffHtml);
 				}
 			});
 		});
